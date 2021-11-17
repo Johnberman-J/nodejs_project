@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/post-function.js"></script>
+
 
 </head>
     <body>       
@@ -20,14 +22,14 @@
             </div>
           </section>
           <br>
-        <input class="input" type="text" placeholder="작성자명">
-        <input class="input" type="text" placeholder="제목">
-        <input class="input" type="text" placeholder="비밀번호">
+        <input id="userName" class="input" type="text" placeholder="작성자명">
+        <input id="title" class="input" type="text" placeholder="제목">
+        <input id="password" class="input" type="password" placeholder="비밀번호">
         <p>
-            <textarea class="textarea" placeholder="포스팅 내용을 적어주세요." rows="15"></textarea>
+            <textarea id="content" class="textarea" placeholder="포스팅 내용을 적어주세요." rows="15"></textarea>
         </p>
         <br>
-        <button class="button is-dark">작성완료</button>
+        <button type="button" class="button is-dark" onclick="moveIndexpage()">작성완료</button>
 
     </body>
 </html>
