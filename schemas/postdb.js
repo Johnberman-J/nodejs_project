@@ -7,7 +7,7 @@ const postingSchema = new Schema({   // posting시 필요한 정보들을 기입
     required: true,                // 이 값이 필수정보냐? true!
     unique: true                   // 이 postId가 unique 해야하냐? true!
   },
-  name: {
+  userName: {
     type: String,
     required: true,
   },
