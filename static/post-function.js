@@ -1,4 +1,4 @@
-function moveIndexpage() {
+function postpageButton() {
     const userName = $('#userName').val();
     const title = $('#title').val();
     const password = $('#password').val();

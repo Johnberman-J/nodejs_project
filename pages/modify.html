@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
+    <script src="../static/modify-function.js"></script>
+
 </head>
     <body>
         <section class="hero is-success">
@@ -27,8 +28,8 @@
             <textarea class="textarea" placeholder="수정할 내용을 적어주세요." rows="15"></textarea>
         </p>
         <br>
-        <button class="button is-dark">수정완료</button>
-        <button class="button is-dark">삭제하기</button>
+        <button onclick="modifyButton()" class="button is-dark">수정완료</button>
+        <button onclick="deleteButton()" class="button is-dark">삭제하기</button>
 
     </body>
 </html>
