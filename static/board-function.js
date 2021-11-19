@@ -1,4 +1,4 @@
-function postpageButton(event) {
+function postpageButton() {
     const checkNumber = Math.random()
     const dateNow = new Date();
     const year = dateNow.getFullYear()
