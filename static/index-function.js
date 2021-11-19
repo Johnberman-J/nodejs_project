@@ -4,17 +4,24 @@ $(document).ready(function () {
         type: 'GET',
         data: {},
         success: (res) => {
-            var receivingData = res
+            const receivingData = res
             console.log(receivingData);
-            let temp_html = `
-            <tr>
-                <th>${postDate}</th>
-                <td><a href="/detail">${title}</a></td>
-                <td>${userName}</td>
-            </tr>`
-
+            
             for(let i = receivingData.length-1; i>=0; i--) {
-                    
+                let postDate = receivingData[i]['postDate']
+                let title = receivingData[i]['title']
+                let userName = receivingData[i]['userName']
+                let checkNumber = receivingData[i]['checkNumber']
+                
+
+                let temp_html = `
+                                <tr>
+                                    <th>${postDate}</th>
+                                    <td><a href="/detail">${title}</a></td>
+                                    <td>${userName}</td>
+                                </tr>`
+
+                $('#table').append(temp_html)
             }
         }
     })
@@ -23,10 +30,3 @@ $(document).ready(function () {
 function movePostpage() {
     location.href="/board"    
 }
-
-
-{/* <tr>
-    <th>11.07</th>
-    <td><a href="/detail">이거시 코딩이다</a></td>
-    <td>Jason</td>
-</tr> */}

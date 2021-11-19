@@ -8,13 +8,13 @@ router.post('/board/create', async(req, res) => {
 
     const{checkNumber, userName, password, content, title, postDate} = req.body;
     await posting.create({checkNumber, userName, password, content, title, postDate});
-    
+    posting.i
+
     res.send({'msg' : 'success'})
 })
 
 router.get('/home', async(req, res) => {
     const allData = await posting.find({});
-    console.log(allData);
 
     res.send(allData);
 })
