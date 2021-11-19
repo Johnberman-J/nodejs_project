@@ -1,7 +1,7 @@
 function moveModifypage() {
-    location.href="modify.html";
+    window.location.href="/modify";
 }
 
 function moveIndexpage() {
-    location.href='index.html';
+    window.location.href='/';
 }

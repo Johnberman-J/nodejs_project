@@ -1,3 +1,3 @@
 function movePostpage() {
-    location.href="post.html"    
+    window.location.href="/board"    
 }

@@ -6,5 +6,5 @@ function postpageButton() {
 
     console.log(userName,title,password,content)
 
-    location.href='index.html'
+    window.location.href = '/'
 }

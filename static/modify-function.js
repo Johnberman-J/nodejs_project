@@ -1,7 +1,7 @@
 function modifyButton() {
-    location.href='detail.html'
+    window.location.href='/detail'
 }
 
 function deleteButton() {
-    location.href='index.html'
+    window.location.href='/'
 }
