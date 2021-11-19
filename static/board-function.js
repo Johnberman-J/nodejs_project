@@ -4,6 +4,10 @@ function postpageButton() {
     const password = $('#password').val();
     const content = $('#content').val();
 
+    $.ajax({
+        
+    })
+
     console.log(userName,title,password,content)
 
     window.location.href = '/'
