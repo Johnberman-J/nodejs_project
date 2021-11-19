@@ -1,5 +1,5 @@
-function postpageButton() {
-    let postId = 1;
+function postpageButton(event) {
+    const checkNumber = Math.random()
     const dateNow = new Date();
     const year = dateNow.getFullYear()
     const month = dateNow.getMonth()+1
@@ -17,17 +17,17 @@ function postpageButton() {
         alert('게시 정보를 입력해주세요!')
         return true;
     } else {
-        console.log(postId,postDate,userName,title,password,content)
+        console.log(postDate,userName,title,password,content)
         $.ajax({
             url:`/data/board/create`,
-            type: "POST",
+            type: 'POST',
             data: {
-                'postId': postId,
-                'userName': userName,
-                'password': password,
-                'content': content,                
-                'title': title,               
-                'postDate': postDate
+                checkNumber: checkNumber,
+                userName: userName,
+                password: password,
+                content: content,                
+                title: title,               
+                postDate: postDate
             },
             success: (res) => {
                 if(res['msg']=='success') {

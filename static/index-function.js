@@ -1,3 +1,14 @@
+$(document).ready(function () {
+    $.ajax({
+        url:`/data/home`,
+        type: 'GET',
+        data: {},
+        success: (res) => {
+            console.log(res)
+        }
+    })
+})
+
 function movePostpage() {
-    window.location.href="/board"    
+    location.href="/board"    
 }

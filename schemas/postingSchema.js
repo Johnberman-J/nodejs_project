@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const { Schema } = mongoose;                
 const postingSchema = new Schema({   // posting시 필요한 정보들을 기입
-  postId: {
-    type: Number,              // 이 postId가 unique 해야하냐? true!
+  checkNumber : {
+    type: Number,
   },
   userName: {
     type: String,
