@@ -5,7 +5,7 @@ $(document).ready(function () {
         data: {},
         success: (res) => {
             const receivingData = res
-            console.log(receivingData);
+            // console.log(receivingData);
             
             for(let i = receivingData.length-1; i>=0; i--) {
                 let postDate = receivingData[i]['postDate']
@@ -17,7 +17,7 @@ $(document).ready(function () {
                 let temp_html = `
                                 <tr>
                                     <th>${postDate}</th>
-                                    <td><a href="/data/detail/${detailId}">${title}</a></td>
+                                    <td><a href="detail/?id=${detailId}">${title}</a></td>
                                     <td>${userName}</td>
                                 </tr>`
 

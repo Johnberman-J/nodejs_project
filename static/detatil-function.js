@@ -1,6 +1,12 @@
+let params = location.search;
+// console.log(params)
+let detailId = params.substring(4)
+// console.log(detailId)
+
 $(document).ready(function () {
+    
     $.ajax({
-        url:`/data/detail/:detailId`,
+        url:`/data/detail/${detailId}`,
         type: 'GET',
         data: {},
         success: (res) => {
@@ -30,7 +36,7 @@ $(document).ready(function () {
 
 
 function moveModifypage() {
-    window.location.href="/modify";
+    window.location.href=`/modify?id=${detailId}`;
 }
 
 function moveIndexpage() {
@@ -43,3 +49,6 @@ function moveIndexpage() {
 //     <td>이거시 코딩이다</td>
 //     <td>11.17</td>
 // </tr>
+
+// let findingParams = new URLSearchParams(queryString);
+//     console.log(findingParams)

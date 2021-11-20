@@ -34,9 +34,31 @@ router.get('/detail/:detailId', async(req, res) => {
         selectedPostDate : selectedPostDate,
         selectedContent : selectedContent
     }
-
     res.send(sendingData)
+    
 })
+
+router.get('/modify/:modifyId', async(req, res) => {
+    const { modifyId } = req.params;
+    const allData = await posting.find({});
+    const selectedData = allData[modifyId];
+    
+    const selectedUserName = selectedData['userName']
+    const selectedTitle = selectedData['title']
+    const selectedContent = selectedData['content']
+
+    // console.log(selectedUserName,selectedTitle,selectedContent)
+
+    let sendingData = {
+        selectedUserName : selectedUserName,
+        selectedTitle : selectedTitle,
+        selectedContent : selectedContent
+    }
+    res.send(sendingData)
+
+})
+
+// router.post()
 
 module.exports = router; // 반드시 써줘야한다. 그래야 routing 다시 잡힐때 처리 가능하다...
                          // 왜 /api같은거 써먹는거냐... 그냥 하면 안되냐 app.js에서...
