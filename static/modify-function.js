@@ -59,6 +59,9 @@ function deleteButton() {
     })
 }
 
+function backButton() {
+    window.location.href=`/detail/?id=${modifyId}`
+}
 
 
 // <input id="userName" class="input" type="text" placeholder="작성자명" readonly>
