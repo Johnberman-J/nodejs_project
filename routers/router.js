@@ -35,7 +35,6 @@ router.get('/detail/:detailId', async(req, res) => {
         selectedContent : selectedContent
     }
     res.send(sendingData)
-    
 })
 
 router.get('/modify/:modifyId', async(req, res) => {
@@ -55,10 +54,47 @@ router.get('/modify/:modifyId', async(req, res) => {
         selectedContent : selectedContent
     }
     res.send(sendingData)
-
 })
 
-// router.post()
+router.post('/modify/:modifyId', async(req, res) => {
+    const { modifyId } = req.params;
+    const { password, content } = req.body;
+    const recievingPassword = { password, content }['password']
+    const recievingContent = { password, content }['content']
+    
+    const allData = await posting.find({});
+    const selectedData = allData[modifyId];
+    
+
+    const selectedPassword = selectedData['password'];
+    const selectedCheckNum = selectedData['checkNumber'];
+
+    if(selectedPassword!=recievingPassword) {
+        res.send({msg: "비밀번호가 일치하지 않습니다!"})
+    } else {
+        await posting.updateOne({checkNumber: selectedCheckNum}, {content: recievingContent})
+        res.send({msg: "수정 완료!"})
+    }
+})
+
+router.delete('/modify/:modifyId', async(req, res) => {
+    const { modifyId } = req.params;
+    const { password } = req.body;
+    const recievingPassword = { password }['password']
+    
+    const allData = await posting.find({});
+    const selectedData = allData[modifyId];
+
+    const selectedPassword = selectedData['password'];
+    const selectedCheckNum = selectedData['checkNumber'];
+
+    if(selectedPassword!=recievingPassword) {
+        res.send({msg: "비밀번호가 일치하지 않습니다!"})
+    } else {
+        await posting.deleteOne({checkNumber : selectedCheckNum})
+        res.send({msg: "삭제 완료!"})
+    }
+})
 
 module.exports = router; // 반드시 써줘야한다. 그래야 routing 다시 잡힐때 처리 가능하다...
                          // 왜 /api같은거 써먹는거냐... 그냥 하면 안되냐 app.js에서...

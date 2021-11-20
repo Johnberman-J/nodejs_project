@@ -23,13 +23,8 @@ $(document).ready(function () {
                                 </tr>
                                 `
             $('#info').append(tableTemplate);
-            
-            let contentTemplate =`
-                                    <textarea id="content" class="textarea" rows="15" readonly>
-                                    ${selectedContent}
-                                    </textarea>
-                                 `
-            $('#content').append(contentTemplate)
+
+            document.getElementById("content").value = selectedContent;
         }
     })
 })
@@ -52,3 +47,10 @@ function moveIndexpage() {
 
 // let findingParams = new URLSearchParams(queryString);
 //     console.log(findingParams)
+
+// let contentTemplate =`
+//                         <textarea id="content" class="textarea" rows="15" readonly>
+//                         ${selectedContent}
+//                         </textarea>
+//                     `
+// $('#content').append(contentTemplate)

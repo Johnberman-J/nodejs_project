@@ -33,7 +33,6 @@ function postpageButton() {
                 if(res['msg']=='success') {
                     alert('게시글 등록 완료!')
                     window.location.href = '/'
-                    postId++
                 }
             }
         })

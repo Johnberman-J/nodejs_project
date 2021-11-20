@@ -1,40 +1,60 @@
 let params = location.search;
 let modifyId = params.substring(4)
 
-// $(document).ready(() => {
-//     $.ajax({
-//         type:'GET',
-//         url: `/data/modify/${modifyId}`,
-//         data:{},
-//         success: (res) => {
-//             let userName = res['selectedUserName']
-//             let title = res['selectedTitle']
-//             let content = res['selectedContent']
+$(document).ready(() => {
+    $.ajax({
+        type:'GET',
+        url: `/data/modify/${modifyId}`,
+        data:{},
+        success: (res) => {
+            let userName = res['selectedUserName']
+            let title = res['selectedTitle']
+            let content = res['selectedContent']
             
-//             // console.log(userName,title,content)
+            // console.log(userName,title,content)
             
-//             $('input[id=userName]').attr('value',userName);
-//             $('input[id=title]').attr('value',title);
-//             document.getElementById("content").value = content;
-//         }
+            $('input[id=userName]').attr('value',userName);
+            $('input[id=title]').attr('value',title);
+            document.getElementById("content").value = content;
+        }
 
 
-//     })
-// })
+    })
+})
 
-// function modifyButton() {
-//     const password = $('#password').val();
+function modifyButton() {
+    const password = $('#password').val();
+    const content = $('#content').val();
 
-//     $.ajax({
-//         type:''
-
-//     })
-
-//     window.location.href='/detail'
-// }
+    $.ajax({
+        type: 'POST',
+        url: `/data/modify/${modifyId}`,
+        data: {
+            password: password,
+            content: content
+        },
+        success: (res) => {
+            alert(res['msg'])
+            window.location.href=`/detail/?id=${modifyId}`
+        }
+    })
+}
 
 function deleteButton() {
-    window.location.href='/'
+    const password = $('#password').val();
+
+    $.ajax({
+        type: 'DELETE',
+        url: `/data/modify/${modifyId}`,
+        data: {
+            password: password
+        },
+        success: (res) => {
+            alert(res['msg'])
+            if(res['msg']=="삭제 완료!")
+            window.location.href=`/`
+        }
+    })
 }
 
 
