@@ -35,7 +35,9 @@ function modifyButton() {
         },
         success: (res) => {
             alert(res['msg'])
-            window.location.href=`/detail/?id=${modifyId}`
+            if(res['msg']=="수정 완료!"){
+                window.location.href=`/detail/?id=${modifyId}`
+            }
         }
     })
 }
