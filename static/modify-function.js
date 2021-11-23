@@ -1,3 +1,5 @@
+// import { encrypt } from "ncrypt-js"
+
 let params = location.search;
 let modifyId = params.substring(4)
 
@@ -26,6 +28,11 @@ function modifyButton() {
     const password = $('#password').val();
     const content = $('#content').val();
 
+    // const key = 'encrypt-practice';
+    // const ncryptObject = new ncrypt(key)
+    // const encryptPW = ncryptObject.encrypt(password)
+
+
     $.ajax({
         type: 'POST',
         url: `/data/modify/${modifyId}`,
@@ -44,6 +51,11 @@ function modifyButton() {
 
 function deleteButton() {
     const password = $('#password').val();
+
+    // const key = 'encrypt-practice';
+    // const ncryptObject = new ncrypt(key)
+    // const encryptPW = ncryptObject.encrypt(password)
+
 
     $.ajax({
         type: 'DELETE',
@@ -69,3 +81,22 @@ function backButton() {
 // <input id="content" class="input" id="password" type="text" placeholder="비밀번호"></input>
 
 // $('input[name=inputNm]').attr('value',변수명);
+
+
+// const ncrypt = require('ncrypt-js')
+
+// const pw1 = 'aqwe';
+// const pw2 = '123'
+// const key = 'key';
+
+// const keyObject = new ncrypt(key)
+// const encryptPW1 = keyObject.encrypt(pw1)
+// const encryptPW2 = keyObject.encrypt(pw2)
+
+// console.log(encryptPW1,typeof(encryptPW2))
+
+// var decryptedPW1 = keyObject.decrypt(encryptPW1);
+// var decryptedPW2 = keyObject.decrypt(encryptPW2);
+
+
+// console.log(decryptedPW1, decryptedPW2)

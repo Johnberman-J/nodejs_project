@@ -1,3 +1,8 @@
+// import { encrypt } from "ncrypt-js"
+// const key = 'encrypt-practice';
+// const ncryptObject = new ncrypt(key)
+
+
 function postpageButton() {
     const checkNumber = Math.random()
     const dateNow = new Date();
@@ -10,6 +15,10 @@ function postpageButton() {
     const title = $('#title').val();
     const password = $('#password').val();
     const content = $('#content').val();
+
+    // Adding password Encryt (2021-11-21)
+    
+    // const encryptPW = ncryptObject.encrypt(password)
 
     // console.log(postId,postDate,userName,title,password,content)
 

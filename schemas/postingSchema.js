@@ -8,7 +8,7 @@ const postingSchema = new Schema({   // posting시 필요한 정보들을 기입
   userName: {
     type: String,
   },
-  password: {
+  encryptPW: {
     type: String,
   },
   content: {
@@ -19,6 +19,9 @@ const postingSchema = new Schema({   // posting시 필요한 정보들을 기입
   },
   postDate: {
     type: String,
+  },
+  password: {
+    type: String
   }
 });
 

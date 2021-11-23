@@ -2,6 +2,7 @@ const express = require('express');
 const posting = require('../schemas/postingSchema')
 
 
+
 const router = express.Router();
 
 router.post('/board/create', async(req, res) => {

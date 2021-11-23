@@ -1,0 +1,59 @@
+<!-- 로그인 페이지 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>로그인 페이지</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="../static/login-function.js"></script>
+
+</head>
+  <body>
+    <section class="hero is-success">
+      <div class="hero-body">
+        <p class="title">
+          로그인 페이지
+        </p>
+      </div>
+    </section>
+    <br>
+    
+    <div class="field">
+        <label class="label">닉네임</label>
+        <div class="control has-icons-left has-icons-right">
+          <input class="input is-success" type="text" placeholder="닉네임을 입력해주세요.">
+          <span class="icon is-small is-left">
+            <i class="fas fa-user"></i>
+          </span>
+          <span class="icon is-small is-right">
+            <i class="fas fa-check"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">비밀번호</label>
+        <p class="control has-icons-left">
+          <input class="input" type="password" placeholder="비밀번호를 입력해주세요.">
+          <span class="icon is-small is-left">
+            <i class="fas fa-lock"></i>
+          </span>
+        </p>
+      </div>
+
+      <div class="field">
+          <button class="button is-success" id="login">
+            Login
+          </button>
+          
+          <button class="button is-success" id="sign-in">
+            Sign In
+          </button>        
+      </div>
+
+  </body>
+</html>
