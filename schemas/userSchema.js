@@ -1,16 +1,16 @@
 const mongoose = require("mongoose");
-
-const { Schema } = mongoose;                
-const userSchema = new Schema({   // posting시 필요한 정보들을 기입
-  nickname: {
-    type: String,
-  },
-  password: {
-    type: String,
-  },
-  confirmPW: {
-    type: String
-  }
+            
+const userSchema = new mongoose.Schema({   // posting시 필요한 정보들을 기입
+  nickname: String,
+  password: String,
+  confirmPW: String,
 });
+
+userSchema.virtual("userId").get(function () {
+  return this._id.toHexString();
+})
+userSchema.set("toJson", {
+  virtuals: true,
+})
 
 module.exports = mongoose.model("user", userSchema);

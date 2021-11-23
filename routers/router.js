@@ -1,6 +1,8 @@
 const express = require('express');
 const posting = require('../schemas/postingSchema');
 const userInfo = require("../schemas/userSchema");
+const Joi = require("joi");
+
 
 
 
@@ -105,18 +107,23 @@ router.delete('/modify/:modifyId', async(req, res) => {
 
 // 회원가입(이메일 중복 검사) 기능
 router.get("/register", async(req, res) => {
-    
+    const { nickname } = req.body;
+    const checkedNickname = userInfo.findOne({ nickname });
 
-    res.send({msg: "fail"})
+    if(!checkedNickname) {
+        res.status(404).send({ errorMSG: "fail"});
+        return;
+    }
+
     res.send({msg: "success"})
 })
 
 // 회원가입(register) 기능 구현
-router.post("/register", async(req, res) => {
+// router.post("/register", async(req, res) => {
 
 
-    res.send({msg : "success"})
-})
+//     res.send({msg : "success"})
+// })
 
 
 

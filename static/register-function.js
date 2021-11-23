@@ -11,12 +11,12 @@ function nicknameChecker() {
     
     $.ajax({
         type: "GET",
-        url: "/api/register",
+        url: "/data/register",
         data: {
             nickname: nickname,
         },
         success: (res) => {
-            if(res[msg]!=="success") {
+            if(res["msg"]!=="success") {
                 alert("중복된 닉네임입니다!");
                 return;
             }
