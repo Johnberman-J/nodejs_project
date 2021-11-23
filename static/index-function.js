@@ -31,7 +31,13 @@ function movePostpage() {
     location.href="/board"    
 }
 
+function moveLoginpage() {
+    location.href="/login"
+}
 
+function moveRegisterpage() {
+    location.href="/register"
+}
 
 
 // for(let i = receivingData.length-1; i>=0; i--) {

@@ -2,6 +2,9 @@
 // const key = 'encrypt-practice';
 // const ncryptObject = new ncrypt(key)
 
+function moveMainpage() {
+    location.href="/"
+}
 
 function postpageButton() {
     const checkNumber = Math.random()

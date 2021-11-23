@@ -25,7 +25,7 @@
     <div class="field">
         <label class="label">닉네임</label>
         <p class="control has-icons-left has-icons-right">
-          <input class="input" type="email" placeholder="사용하실 닉네임을 입력해주세요.">
+          <input id="nickname" class="input" type="text" placeholder="사용하실 닉네임을 입력해주세요. 닉네임은 `최소 3자 이상, 알파벳 대소문자(a~z, A~Z), 숫자(0~9)`로 구성되어야 합니다.">
           <span class="icon is-small is-left">
             <i class="fas fa-envelope"></i>
           </span>
@@ -37,7 +37,7 @@
 
       <div class="field">
         <p class="control">
-          <button class="button is-success">
+          <button onclick="nicknameChecker()" class="button is-dark">
             중복 검사
           </button>
         </p>
@@ -46,7 +46,7 @@
       <div class="field">
         <label class="label">비밀번호</label>
         <p class="control has-icons-left">
-          <input class="input" type="password" placeholder="비밀번호를 입력해주세요.">
+          <input id="password" class="input" type="password" placeholder="비밀번호를 입력해주세요. 비밀번호는 `최소 4자 이상`이며, 닉네임과 같은 값이 포함되어선 안됩니다.">
           <span class="icon is-small is-left">
             <i class="fas fa-lock"></i>
           </span>
@@ -56,7 +56,7 @@
       <div class="field">
         <label class="label">비밀번호 확인</label>
         <p class="control has-icons-left">
-          <input class="input" type="password" placeholder="비밀번호를 다시 입력해주세요.">
+          <input id="password-check" class="input" type="password" placeholder="비밀번호를 다시 입력해주세요.">
           <span class="icon is-small is-left">
             <i class="fas fa-lock"></i>
           </span>
@@ -64,12 +64,12 @@
       </div>
 
       <div class="field">
-          <button class="button is-success">
+          <button onclick="registerSubmit()" class="button is-dark">
             회원가입
           </button>
       
-         <button class="button is-success">
-            이전페이지
+         <button onclick="moveMainpage()" class="button is-dark">
+            메인 페이지
          </button>
      </div>
 

@@ -25,9 +25,9 @@
     <div class="field">
         <label class="label">닉네임</label>
         <div class="control has-icons-left has-icons-right">
-          <input class="input is-success" type="text" placeholder="닉네임을 입력해주세요.">
+          <input class="input" type="text" placeholder="닉네임을 입력해주세요.">
           <span class="icon is-small is-left">
-            <i class="fas fa-user"></i>
+            <i class="fas fa-lock"></i>
           </span>
           <span class="icon is-small is-right">
             <i class="fas fa-check"></i>
@@ -46,13 +46,17 @@
       </div>
 
       <div class="field">
-          <button class="button is-success" id="login">
+          <button class="button is-dark" id="login">
             Login
           </button>
           
-          <button class="button is-success" id="sign-in">
+          <button onclick="moveRegisterpage()" class="button is-dark" id="sign-in">
             Sign In
-          </button>        
+          </button>  
+          
+          <button onclick="moveMainpage()" class="button is-dark" id="sign-in">
+            메인 페이지
+          </button>
       </div>
 
   </body>
