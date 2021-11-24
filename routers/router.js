@@ -1,9 +1,9 @@
 const express = require('express');
 const posting = require('../schemas/postingSchema');
 const users = require("../schemas/userSchema");
-const Joi = require("joi");
 const validationSchema = require("../schemas/validation");
-
+const jwt = require("jsonwebtoken");
+const authJWT = require("../schemas/auth-jwt");
 
 
 const router = express.Router();
@@ -144,6 +144,11 @@ router.post("/register", validationSchema, async (req, res) => {
         await user.save();
         res.send({ msg: "회원가입 완료!"});
     }
+})
+
+router.post('/login', authJWT, async (req, res) => {
+    console.log("여길 도착합니다!")
+    res.send( { msg: "통신성공!" } )
 })
 
 
