@@ -1,8 +1,8 @@
 const express = require('express');
 const posting = require('../schemas/postingSchema');
-const userInfo = require("../schemas/userSchema");
+const users = require("../schemas/userSchema");
 const Joi = require("joi");
-
+const validationSchema = require("../schemas/validation");
 
 
 
@@ -106,24 +106,29 @@ router.delete('/modify/:modifyId', async(req, res) => {
 })
 
 // 회원가입(이메일 중복 검사) 기능
-router.get("/register", async(req, res) => {
-    const { nickname } = req.body;
-    const checkedNickname = userInfo.findOne({ nickname });
+// router.get("/register", async(req, res) => {
+//     const { nickname } = req.body;
+//     const checkedNickname = userInfo.findOne({ nickname });
 
-    if(!checkedNickname) {
-        res.status(404).send({ errorMSG: "fail"});
-        return;
-    }
+//     if(!checkedNickname) {
+//         res.send({ msg: "fail"});
+//         return;
+//     }
 
-    res.send({msg: "success"})
-})
+//     res.send({msg: "success"})
+// })
 
 // 회원가입(register) 기능 구현
-// router.post("/register", async(req, res) => {
-
-
-//     res.send({msg : "success"})
-// })
+router.post("/register", validationSchema, async (req, res) => {
+    console.log({ nickname })
+    const checkedNickname = await users.findOne({nickname});
+    
+    // if(!checkedNickname) {
+    //     users.create({ nickname, password, confirmPW });
+    //     res.send({ msg: "회원가입 완료!"});
+    // } 
+    // res.send( {msg: "중복된 닉네임입니다!"} );
+})
 
 
 
