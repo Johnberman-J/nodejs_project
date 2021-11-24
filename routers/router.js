@@ -130,13 +130,20 @@ router.post("/register", validationSchema, async (req, res) => {
         // console.log("중복값이 있다!");
         res.send({ msg: "중복된 닉네임입니다!"});
         return
+    }
+    // console.log("중복값이 없다! 다음 체크 고고!");
+
+    const validNickname = req.body["nickname"];
+    const validPassword = req.body["password"];
+
+    if(validPassword.includes(validNickname)) {
+        // console.log("닉네임이랑 비슷하당!")
+        res.send({ msg: "닉네임과 같은 값이 존재합니다!"})
     } else {
-        // console.log("중복값이 없다! 저장 고고!");
         const user = new users({ nickname, password, confirmPW });
-        await user.save()
+        await user.save();
         res.send({ msg: "회원가입 완료!"});
     }
-    
 })
 
 
