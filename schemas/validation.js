@@ -13,12 +13,14 @@ const validationSchema = Joi.object({
 })
 
 module.exports = async (req, res, next) => {
+    console.log("이곳을 지나서")
     try {
-        const result = await validationSchema.validateAsync(req.body);
-        console.log(result);
+        await validationSchema.validateAsync(req.body);
     } catch (error) {
         res.send({msg: "닉네임 또는 패스워드를 확인해주세요"});
+        return;
     }
+    console.log("두번째로 지나서! error가 아닐때!")
     next();
 }
 

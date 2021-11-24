@@ -120,14 +120,23 @@ router.delete('/modify/:modifyId', async(req, res) => {
 
 // 회원가입(register) 기능 구현
 router.post("/register", validationSchema, async (req, res) => {
-    console.log({ nickname })
+    // console.log("이곳에 도착");
+    const { nickname, password, confirmPW } = req.body;
+    // console.log({ nickname, password, confirmPW })
     const checkedNickname = await users.findOne({nickname});
+    // console.log(checkedNickname);
     
-    // if(!checkedNickname) {
-    //     users.create({ nickname, password, confirmPW });
-    //     res.send({ msg: "회원가입 완료!"});
-    // } 
-    // res.send( {msg: "중복된 닉네임입니다!"} );
+    if(checkedNickname) {
+        // console.log("중복값이 있다!");
+        res.send({ msg: "중복된 닉네임입니다!"});
+        return
+    } else {
+        // console.log("중복값이 없다! 저장 고고!");
+        const user = new users({ nickname, password, confirmPW });
+        await user.save()
+        res.send({ msg: "회원가입 완료!"});
+    }
+    
 })
 
 
