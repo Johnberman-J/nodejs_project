@@ -1,3 +1,5 @@
+const token = localStorage.getItem("token");
+
 $(document).ready(function () {
     $.ajax({
         url:`/data/home`,
@@ -27,8 +29,15 @@ $(document).ready(function () {
     })
 })
 
-function movePostpage() {
-    location.href="/board"    
+function movePostpage() {   
+    if(!token) {
+        alert("로그인이 필요합니다!");
+        location.href="/login";
+        return;
+    } else {
+        checkingAuth();
+        // location.href="/board"    
+    }        
 }
 
 function moveLoginpage() {
@@ -43,6 +52,22 @@ function logout() {
     location.href="/";
     localStorage.removeItem("token");
 }
+
+function checkingAuth() {
+    alert(token);
+    $.ajax({
+        type: "GET",
+        url: "/data/auth",
+        // Headers: {
+        //     authorization: 1234
+        // },
+        data: {},
+        success: (res) => {
+            // alert(res["msg"]);
+        }
+    })
+};
+
 
 
 // for(let i = receivingData.length-1; i>=0; i--) {

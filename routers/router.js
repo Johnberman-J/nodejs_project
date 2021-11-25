@@ -137,7 +137,7 @@ router.post("/register", validationSchema, async (req, res) => {
     const validPassword = req.body["password"];
 
     if(validPassword.includes(validNickname)) {
-        // console.log("닉네임이랑 비슷하당!")
+        // console.log("닉네임이랑 비슷함!")
         res.send({ msg: "닉네임과 같은 값이 존재합니다!"})
     } else {
         const user = new users({ nickname, password, confirmPW });
@@ -161,10 +161,16 @@ router.post('/login', async (req, res) => {
             return;
         }
         const token = jwt.sign({ nickname }, "jason");
-        console.log(token);
+        // console.log(token);
         res.send(token);
     }
-    
+})
+
+// 로그인 인증을 위한 api
+router.get("/auth", authJWT, async (req, res) => {
+    console.log("이곳에 도착합니다.");
+    console.log(req.body)
+    res.send({msg : "연결 성공!"});
 })
 
 

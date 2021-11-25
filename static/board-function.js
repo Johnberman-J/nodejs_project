@@ -2,6 +2,20 @@
 // const key = 'encrypt-practice';
 // const ncryptObject = new ncrypt(key)
 
+// $(document).ready(() => {
+//     const token = localStorage.getItem("token");
+//     if(!token) {
+//         alert("로그인이 필요합니다!");
+//         location.href="/login";
+//         return;
+//     }
+//     $.ajax({
+//         type: "GET",
+//         url: "/data/auth",
+//         heade
+//     })
+// });
+
 function moveMainpage() {
     location.href="/"
 }
