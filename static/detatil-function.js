@@ -55,8 +55,26 @@ async function checkingAuth () {
 };
 
 
+function addComment() {
+    const comment = $("#comment").val();
+    if(!comment) {
+        alert("댓글 내용을 입력해주세요!");
+        return;
+    }
+    alert("댓글이 등록되었습니다!");
+}
 
+function deleteComment() {
+    if(confirm("정말로 삭제하시겠습니까?")) {
+        alert("삭제 완료!");
+    } else {
+        alert("취소 되었습니다!");
+    }
+}
 
+function modifyComment() {
+    alert("수정버튼입니다!");
+}
 
 // <tr>
 //     <th>Jason</th>

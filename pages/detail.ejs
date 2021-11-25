@@ -42,8 +42,40 @@
             <textarea id="content" class="textarea" rows="15" placeholder="내용을 적어주세요."></textarea>
           </div>
           
-          <button onclick="moveModifypage()" class="button is-dark">수정하기</button>
-          <button onclick="moveIndexpage()" class="button is-dark">목록으로</button>
+          <p>
+            <button onclick="moveModifypage()" class="button is-dark">수정하기</button>
+            <button onclick="moveIndexpage()" class="button is-dark">목록으로</button>
+          </p>
+          <br>
+
+          <div class="box">
+            <div >
+              <textarea id="comment" class="textarea is-primary is-focused is-small" placeholder="댓글을 입력해주세요."></textarea>
+              <br>
+              <button onclick="addComment()" class="button is-dark">댓글작성</button>
+            </div>
+          </div>
+
+          <table class="table is-fullwidth">
+            <thead>
+              <tr>
+                <th>작성자명</th>
+                <th>제목</th>
+                <th>작성날짜</th>
+              </tr>
+            </thead>
+            <tbody id="info">
+              <tr>
+                <th>Jason</th>
+                <td>이거시 코딩이다!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</td>
+                <td>11.17</td>
+                <td id="login">
+                  <button id="comment-modify" onclick="modifyComment()" class="button is-dark">댓글수정</button>
+                  <button id="comment-delete" onclick="deleteComment()" class="button is-dark">댓글삭제</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
     </body>
 </html>
