@@ -104,9 +104,10 @@ async function checkingAuth () {
             Authorization: `bearer ${token}`
         },
         success: (res) => {
-        
+            localStorage.setItem("userID", res["nickname"]);
         }
     })
+    // console.log(result);
     return result;
 };
 

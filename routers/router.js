@@ -168,9 +168,14 @@ router.post('/login', async (req, res) => {
 
 // 로그인 인증을 위한 api
 router.get("/auth", authJWT, async (req, res) => {
-    const findingUser = res.locals;
+    const findingUser = res.locals["nickname"];
     // console.log(findingUser);
-    res.status(200).send({msg: "success"});
+    res.status(200).send({ msg: "success", nickname: findingUser });
+})
+
+router.post("/comment", async (req, res) => {
+    console.log(req.body);
+    res.send("통신연결!");
 })
 
 

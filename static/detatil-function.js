@@ -4,6 +4,7 @@ let detailId = params.substring(4)
 // console.log(detailId)
 const token = localStorage.getItem("token");
 
+
 $(document).ready( async function () {
     
     $.ajax({
@@ -46,7 +47,7 @@ function moveIndexpage() {
     window.location.href='/';
 }
 
-async function checkingAuth() {
+async function checkingAuth () {
     
     const result = $.ajax({
         type: "GET",
@@ -55,20 +56,42 @@ async function checkingAuth() {
             Authorization: `bearer ${token}`
         },
         success: (res) => {
-            
+            localStorage.setItem("userID", res["nickname"]);
         }
     })
+    // console.log(result);
     return result;
 };
 
 
-function addComment() {
+async function addComment() {
+    const result = await checkingAuth();
+    if(result['msg'] !== "success") {
+        alert(result['msg'])
+        location.href="/login"; 
+        return;       
+    }
+
     const comment = $("#comment").val();
+    // console.log(comment)
     if(!comment) {
         alert("댓글 내용을 입력해주세요!");
         return;
     }
-    alert("댓글이 등록되었습니다!");
+
+    const userID = localStorage.getItem("userID")
+    $.ajax({
+        type: "POST",
+        url: "/data/comment",
+        data: {
+            detailId: detailId,
+            userID: userID,
+            comment, comment
+        },
+        success: (res) => {
+            alert(res);
+        }
+    })
 }
 
 function deleteComment() {

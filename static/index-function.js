@@ -1,6 +1,8 @@
+
 const token = localStorage.getItem("token");
 
 $(document).ready(function () {
+    
     $.ajax({
         url:`/data/home`,
         type: 'GET',
@@ -60,7 +62,7 @@ async function moveRegisterpage() {
 
 function logout() {
     location.href="/";
-    localStorage.removeItem("token");
+    localStorage.clear();
 }
 
 async function checkingAuth () {
@@ -72,9 +74,10 @@ async function checkingAuth () {
             Authorization: `bearer ${token}`
         },
         success: (res) => {
-            
+            localStorage.setItem("userID", res["nickname"]);
         }
     })
+    // console.log(result);
     return result;
 };
 
