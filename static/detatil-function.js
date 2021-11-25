@@ -31,15 +31,22 @@ $(document).ready( async function () {
 })
 
 
-function moveModifypage() {
-    window.location.href=`/modify?id=${detailId}`;
+async function moveModifypage() {
+    const result = await checkingAuth();
+    if(result['msg'] !== "success") {
+        alert(result['msg'])
+        location.href="/login";        
+    } else {
+        window.location.href=`/modify?id=${detailId}`;
+    }
+    // window.location.href=`/modify?id=${detailId}`;
 }
 
 function moveIndexpage() {
     window.location.href='/';
 }
 
-async function checkingAuth () {
+async function checkingAuth() {
     
     const result = $.ajax({
         type: "GET",
