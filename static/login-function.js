@@ -9,19 +9,22 @@ function moveMainpage() {
 function login() {
     const nickname = $("#nickname").val();
     const password = $("#password").val();
-
+    
     $.ajax({
         type: "POST",
         url: "/data/login",
-        // Headers: {
-        //     type: 
-        // },
         data: {
             nickname: nickname,
             password: password, 
         },
         success: (res) => {
-            alert(res["msg"]);
+            if(!res["msg"]) {
+                alert("로그인 성공!")
+                localStorage.setItem("token",res);
+                location.href="/"
+            } else {
+                alert(res["msg"]);
+            }           
         }
     })
 }

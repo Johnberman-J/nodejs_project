@@ -146,9 +146,25 @@ router.post("/register", validationSchema, async (req, res) => {
     }
 })
 
-router.post('/login', authJWT, async (req, res) => {
-    console.log("여길 도착합니다!")
-    res.send( { msg: "통신성공!" } )
+router.post('/login', async (req, res) => {
+    const { nickname } = req.body;
+    const userCheck = await users.findOne({ nickname });
+    // console.log(userCheck)
+    if(!userCheck) {
+        res.send({ msg: "존재하지 않는 닉네임입니다!"});
+        return;
+    } else {
+        const passwordCheck = req.body["password"];
+        // console.log(passwordCheck);
+        if(userCheck["password"]!==passwordCheck) {
+            res.send({ msg : "패스워드를 확인해주세요!"});
+            return;
+        }
+        const token = jwt.sign({ nickname }, "jason");
+        console.log(token);
+        res.send(token);
+    }
+    
 })
 
 

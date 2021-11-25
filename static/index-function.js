@@ -39,6 +39,11 @@ function moveRegisterpage() {
     location.href="/register"
 }
 
+function logout() {
+    location.href="/";
+    localStorage.removeItem("token");
+}
+
 
 // for(let i = receivingData.length-1; i>=0; i--) {
 //     let postDate = receivingData[i]['postDate']
