@@ -2,8 +2,15 @@
 
 let params = location.search;
 let modifyId = params.substring(4)
+const token = localStorage.getItem("token");
 
-$(document).ready(() => {
+$(document).ready( async () => {
+    const result = await checkingAuth();
+    if(result['msg'] !== "success") {
+        alert(result['msg']);
+        location.href="/login";
+    }
+
     $.ajax({
         type:'GET',
         url: `/data/modify/${modifyId}`,
@@ -24,7 +31,13 @@ $(document).ready(() => {
     })
 })
 
-function modifyButton() {
+async function modifyButton() {
+    const result = await checkingAuth();
+    if(result['msg'] !== "success") {
+        alert(result['msg']);
+        location.href="/login";
+    }
+
     const password = $('#password').val();
     const content = $('#content').val();
 
@@ -49,7 +62,13 @@ function modifyButton() {
     })
 }
 
-function deleteButton() {
+async function deleteButton() {
+    const result = await checkingAuth();
+    if(result['msg'] !== "success") {
+        alert(result['msg']);
+        location.href="/login";
+    }
+
     const password = $('#password').val();
 
     // const key = 'encrypt-practice';
@@ -74,6 +93,22 @@ function deleteButton() {
 function backButton() {
     window.location.href=`/detail/?id=${modifyId}`
 }
+
+
+async function checkingAuth () {
+    
+    const result = $.ajax({
+        type: "GET",
+        url: "/data/auth",  // token을 생성해준곳을 거쳐야 undefined 안뜬다.
+        headers: {
+            Authorization: `bearer ${token}`
+        },
+        success: (res) => {
+        
+        }
+    })
+    return result;
+};
 
 
 // <input id="userName" class="input" type="text" placeholder="작성자명" readonly>

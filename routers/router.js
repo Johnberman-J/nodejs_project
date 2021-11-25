@@ -168,9 +168,9 @@ router.post('/login', async (req, res) => {
 
 // 로그인 인증을 위한 api
 router.get("/auth", authJWT, async (req, res) => {
-    console.log("이곳에 도착합니다.");
-    console.log(req.body)
-    res.send({msg : "연결 성공!"});
+    const findingUser = res.locals;
+    // console.log(findingUser);
+    res.status(200).send({msg: "success"});
 })
 
 

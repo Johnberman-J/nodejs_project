@@ -2,19 +2,16 @@
 // const key = 'encrypt-practice';
 // const ncryptObject = new ncrypt(key)
 
-// $(document).ready(() => {
-//     const token = localStorage.getItem("token");
-//     if(!token) {
-//         alert("로그인이 필요합니다!");
-//         location.href="/login";
-//         return;
-//     }
-//     $.ajax({
-//         type: "GET",
-//         url: "/data/auth",
-//         heade
-//     })
-// });
+const token = localStorage.getItem("token");
+
+$(document).ready( async () => {
+   const result = await checkingAuth();
+   if(result['msg'] !== "success") {
+        alert(result['msg']);
+        location.href="/login";
+    }
+});
+
 
 function moveMainpage() {
     location.href="/"
@@ -65,6 +62,23 @@ function postpageButton() {
     }
 }
 
+
+
+async function checkingAuth () {
+    
+    const result = $.ajax({
+        type: "GET",
+        url: "/data/auth",  // token을 생성해준곳을 거쳐야 undefined 안뜬다.
+        headers: {
+            Authorization: `bearer ${token}`
+        },
+        success: (res) => {
+            
+            
+        }
+    })
+    return result;
+};
 
 // const dateNow = new Date();
 

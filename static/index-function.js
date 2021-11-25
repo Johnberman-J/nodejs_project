@@ -29,23 +29,33 @@ $(document).ready(function () {
     })
 })
 
-function movePostpage() {   
-    if(!token) {
-        alert("로그인이 필요합니다!");
-        location.href="/login";
-        return;
+async function movePostpage() {   
+    const result = await checkingAuth();
+    if(result['msg'] !== "success") {
+        alert(result['msg'])
+        location.href="/login";        
     } else {
-        checkingAuth();
-        // location.href="/board"    
-    }        
+        location.href="/board";
+    }
+           
 }
 
-function moveLoginpage() {
-    location.href="/login"
+async function moveLoginpage() {
+    const result = await checkingAuth();
+    if(result['msg'] !== "success") {
+        location.href="/login";        
+    } else {
+        alert("이미 로그인이 되어있습니다!");
+    }
 }
 
-function moveRegisterpage() {
-    location.href="/register"
+async function moveRegisterpage() {
+    const result = await checkingAuth();
+    if(result['msg'] !== "success") {
+        location.href="/register";        
+    } else {
+        alert("이미 로그인이 되어있습니다!");
+    }
 }
 
 function logout() {
@@ -53,21 +63,20 @@ function logout() {
     localStorage.removeItem("token");
 }
 
-function checkingAuth() {
-    alert(token);
-    $.ajax({
+async function checkingAuth () {
+    
+    const result = $.ajax({
         type: "GET",
-        url: "/data/auth",
-        // Headers: {
-        //     authorization: 1234
-        // },
-        data: {},
+        url: "/data/auth",  // token을 생성해준곳을 거쳐야 undefined 안뜬다.
+        headers: {
+            Authorization: `bearer ${token}`
+        },
         success: (res) => {
-            // alert(res["msg"]);
+            
         }
     })
+    return result;
 };
-
 
 
 // for(let i = receivingData.length-1; i>=0; i--) {

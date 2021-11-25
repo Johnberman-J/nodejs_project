@@ -2,8 +2,9 @@ let params = location.search;
 // console.log(params)
 let detailId = params.substring(4)
 // console.log(detailId)
+const token = localStorage.getItem("token");
 
-$(document).ready(function () {
+$(document).ready( async function () {
     
     $.ajax({
         url:`/data/detail/${detailId}`,
@@ -37,6 +38,24 @@ function moveModifypage() {
 function moveIndexpage() {
     window.location.href='/';
 }
+
+async function checkingAuth () {
+    
+    const result = $.ajax({
+        type: "GET",
+        url: "/data/auth",  // token을 생성해준곳을 거쳐야 undefined 안뜬다.
+        headers: {
+            Authorization: `bearer ${token}`
+        },
+        success: (res) => {
+            
+        }
+    })
+    return result;
+};
+
+
+
 
 
 // <tr>
