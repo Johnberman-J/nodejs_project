@@ -2,6 +2,7 @@ const express = require('express');
 const posting = require('../schemas/postingSchema');
 const users = require("../schemas/userSchema");
 const validationSchema = require("../schemas/validation");
+const comments = require("../schemas/commentSchema");
 const jwt = require("jsonwebtoken");
 const authJWT = require("../schemas/auth-jwt");
 
