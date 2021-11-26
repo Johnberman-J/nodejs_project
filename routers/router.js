@@ -191,6 +191,12 @@ router.post("/comment/modify", async(req, res) => {
     res.send({msg : "수정 완료!"});
 })
 
+router.delete("/comment/delete", async (req, res) => {
+    const { date } = req.body;
+    await comments.deleteOne({ date : date });
+    res.send();
+})
+
 
 module.exports = router; // 반드시 써줘야한다. 그래야 routing 다시 잡힐때 처리 가능하다...
                          // 왜 /api같은거 써먹는거냐... 그냥 하면 안되냐 app.js에서...

@@ -156,7 +156,19 @@ async function addComment() {
 
 function deleteComment() {
     if(confirm("정말로 삭제하시겠습니까?")) {
+        const date = $("#date-select").val();
+        $.ajax({
+            type:"DELETE",
+            url:"/data/comment/delete",
+            data: {
+                date: date
+            },
+            success: (res) => {
+
+            }
+        });
         alert("삭제 완료!");
+        window.location.href=`/detail?id=${detailId}`;
     } else {
         alert("취소 되었습니다!");
     }
@@ -205,3 +217,4 @@ function inputModify() {
                          `;
     $("#comment-modify").replaceWith(modifyButton);      
 }
+
