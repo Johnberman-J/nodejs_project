@@ -29,6 +29,46 @@ $(document).ready( async function () {
             document.getElementById("content").value = selectedContent;
         }
     })
+
+    $.ajax({
+        type: "GET",
+        url: "/data/comment",
+        success: (res) => {
+            const receivingData = res;
+            // console.log(receivingData)
+            for(let i = receivingData.length-1; i>=0; i--) {
+                const selecteddetailId = receivingData[i]["detailId"];
+                // console.log(selecteddetailId);
+                // console.log(detailId)
+                if(selecteddetailId==detailId) {
+                    const selecteduserID = receivingData[i]["userID"];
+                    // console.log(selecteduserID)
+                    const comment = receivingData[i]["comment"];
+                    // console.log(comment)
+                    if(selecteduserID==localStorage.getItem("userID")){
+                        let tableTemplate = `<tr>
+                                                <th>${selecteduserID}</th>
+                                                <td>${comment}</td>
+                                                <td id="login">
+                                                <button id="comment-modify" onclick="modifyComment()" class="button is-dark">댓글수정</button>
+                                                <button id="comment-delete" onclick="deleteComment()" class="button is-dark">댓글삭제</button>
+                                                </td>
+                                            </tr>`
+                        $("#commentinfo").append(tableTemplate);
+                    } else {
+                        let tableTemplate = `<tr>
+                                                <th>${selecteduserID}</th>
+                                                <td>${comment}</td>
+                                             </tr>`;
+                        $("#commentinfo").append(tableTemplate);
+
+
+                    }
+                    // $("#commentinfo").append(tableTemplate);
+                }
+            }
+        }
+    })
 })
 
 
@@ -89,9 +129,11 @@ async function addComment() {
             comment, comment
         },
         success: (res) => {
-            alert(res);
+            
         }
     })
+    alert("댓글이 등록되었습니다!");
+    window.location.href=`/detail?id=${detailId}`;
 }
 
 function deleteComment() {
@@ -103,7 +145,9 @@ function deleteComment() {
 }
 
 function modifyComment() {
-    alert("수정버튼입니다!");
+    $.ajax({
+        type:""
+    })
 }
 
 // <tr>

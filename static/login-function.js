@@ -18,9 +18,11 @@ function login() {
             password: password, 
         },
         success: (res) => {
+            console.log(res["nickname"]);
             if(!res["msg"]) {
                 alert("로그인 성공!")
-                localStorage.setItem("token",res);
+                localStorage.setItem("token",res["token"]);
+                localStorage.setItem("userID",res["nickname"]);
                 location.href="/"
             } else {
                 alert(res["msg"]);

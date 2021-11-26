@@ -162,8 +162,9 @@ router.post('/login', async (req, res) => {
             return;
         }
         const token = jwt.sign({ nickname }, "jason");
-        // console.log(token);
-        res.send(token);
+        console.log(nickname);
+        // res.send(token);
+        res.send({token, nickname});
     }
 })
 
@@ -176,9 +177,18 @@ router.get("/auth", authJWT, async (req, res) => {
 
 router.post("/comment", async (req, res) => {
     console.log(req.body);
-    res.send("통신연결!");
+    const { detailId, userID, comment } = req.body;
+    const commentDB = new comments({ detailId, userID, comment });
+    await commentDB.save();
+
+    res.send("댓글이 등록 되었습니다!");
 })
 
+router.get("/comment", async (req, res) => {
+    const allComments = await comments.find({});
+    // console.log( allComments );
+    res.send(allComments)
+})
 
 
 module.exports = router; // 반드시 써줘야한다. 그래야 routing 다시 잡힐때 처리 가능하다...

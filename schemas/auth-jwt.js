@@ -6,11 +6,12 @@ module.exports = async (req, res, next) => {
         const [authType, jwt] = req.headers["authorization"].split(" ");
     // console.log(jwt);
     const tokenInfo = JWT.verify(jwt,"jason");
-    // console.log(tokenInfo["nickname"]);
-    const { checkingUser } = tokenInfo["nickname"];
+    // console.log(tokenInfo);
+    const checkingUser = tokenInfo["nickname"];
+    // console.log( checkingUser );
     
-    const findingUser = await users.findOne({ checkingUser });
-    // console.log(findingUser);
+    const findingUser = await users.findOne({nickname: checkingUser});
+    console.log(findingUser);
     if(!findingUser) {
         res.send({ msg: "로그인이 필요합니다."});
         return;
