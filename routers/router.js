@@ -107,18 +107,6 @@ router.delete('/modify/:modifyId', async(req, res) => {
     }
 })
 
-// 회원가입(이메일 중복 검사) 기능
-// router.get("/register", async(req, res) => {
-//     const { nickname } = req.body;
-//     const checkedNickname = userInfo.findOne({ nickname });
-
-//     if(!checkedNickname) {
-//         res.send({ msg: "fail"});
-//         return;
-//     }
-
-//     res.send({msg: "success"})
-// })
 
 // 회원가입(register) 기능 구현
 router.post("/register", validationSchema, async (req, res) => {
@@ -191,7 +179,16 @@ router.get("/comment", async (req, res) => {
 })
 
 router.post("/comment/modify", async(req, res) => {
-    res.send("통신중입니다!");
+    const {date, comment} = req.body;
+    
+
+    // const newDate = String(new Date()).substring(4,25);
+    await comments.updateOne({ date: date }, {comment: comment});
+    const selectedCommentDB = await comments.findOne({ date });
+
+    console.log(selectedCommentDB);
+
+    res.send({msg : "수정 완료!"});
 })
 
 

@@ -1,3 +1,4 @@
+
 let params = location.search;
 // console.log(params)
 let detailId = params.substring(4)
@@ -48,9 +49,15 @@ $(document).ready( async function () {
                     // console.log(comment)
                     if(selecteduserID==localStorage.getItem("userID")){
                         let tableTemplate = `<tr>
-                                                <th width="239px">${date}</th>
-                                                <th width="217px">${selecteduserID}</th>
-                                                <th width="1215px">${comment}</th>                                                
+                                                <th width="239px">
+                                                    <input id="date-select" type="text" name="text" size="20" style="font-size: 17px; font-weight: bold; width:100%; border: 0;" value="${date}">
+                                                </th>
+                                                <th width="217px">
+                                                    <input id="user-select" type="text" name="text" size="20" style="font-size: 17px; font-weight: bold; width:100%; border: 0;" value="${selecteduserID}">
+                                                </th>
+                                                <th width="1215px">
+                                                    <input id="comment-select" onclick="inputModify()" type="text" name="text" size="20" style="font-size: 17px; font-weight: bold; width:100%; border: 0;" value="${comment}">
+                                                </th>                                                
                                                 <td id="login">
                                                 <button id="comment-modify" onclick="modifyComment()" class="button is-dark">댓글수정</button>
                                                 <button id="comment-delete" onclick="deleteComment()" class="button is-dark">댓글삭제</button>
@@ -59,9 +66,15 @@ $(document).ready( async function () {
                         $("#commentinfo").append(tableTemplate);
                     } else {
                         let tableTemplate = `<tr>
-                                                <th width="239px">${date}</th>
-                                                <th width="217px">${selecteduserID}</th>
-                                                <th width="1215px">${comment}</th>  
+                                                <th width="239px">
+                                                    <input type="text" name="text" size="20" style="font-size: 17px; font-weight: bold; width:100%; border: 0;" value="${date}">
+                                                </th>
+                                                <th width="217px">
+                                                    <input type="text" name="text" size="20" style="font-size: 17px; font-weight: bold; width:100%; border: 0;" value="${selecteduserID}">
+                                                </th>
+                                                <th width="1215px">
+                                                    <input type="text" name="text" size="20" style="font-size: 17px; font-weight: bold; width:100%; border: 0;" value="${comment}">
+                                                </th>  
                                              </tr>`;
                         $("#commentinfo").append(tableTemplate);
 
@@ -150,29 +163,45 @@ function deleteComment() {
 }
 
 function modifyComment() {
+    const date = $("#date-select").val();
+    const comment = $("#comment-select").val();
+
+    if(!comment) {
+        alert("수정 할 내용을 입력해주세요!");
+        return;
+    }
+
+    console.log(date,comment);
+
     $.ajax({
         type: "POST",
         url: "/data/comment/modify",
-        data: "",
+        data: {
+            date: date,
+            comment: comment
+        },
         success: (res) => {
-            alert(res);
+        
         }
-
     })
+    alert("수정완료!");
+    window.location.href=`/detail?id=${detailId}`;
 }
 
-// <tr>
-//     <th>Jason</th>
-//     <td>이거시 코딩이다</td>
-//     <td>11.17</td>
-// </tr>
+function inputModify() {
+    const modifyTemplate =  `
+                            <div id="hidden" style="display: none;" class="box">
+                                <div >
+                                <textarea id="comment" class="textarea is-primary is-focused is-small" placeholder="댓글을 입력해주세요." style="width:100%; border: 0; resize: none;"></textarea>
+                                <br>
+                                <button id="comment-add" onclick="addComment()" class="button is-dark">댓글작성</button>
+                                </div>
+                            </div>
+                            `;
+    $("#hidden").replaceWith(modifyTemplate);
 
-// let findingParams = new URLSearchParams(queryString);
-//     console.log(findingParams)
-
-// let contentTemplate =`
-//                         <textarea id="content" class="textarea" rows="15" readonly>
-//                         ${selectedContent}
-//                         </textarea>
-//                     `
-// $('#content').append(contentTemplate)
+    const modifyButton = `
+                            <button id="comment-modify" onclick="modifyComment()" class="button is-dark">저장</button>
+                         `;
+    $("#comment-modify").replaceWith(modifyButton);      
+}

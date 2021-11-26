@@ -39,7 +39,7 @@
           </table>
           
           <div class="box">
-            <textarea id="content" class="textarea" rows="15" placeholder="내용을 적어주세요."></textarea>
+            <textarea id="content" class="textarea" rows="15" placeholder="내용을 적어주세요." style="width:100%; border: 0; resize: none;"></textarea>
           </div>
           
           <p>
@@ -48,11 +48,11 @@
           </p>
           <br>
 
-          <div class="box">
+          <div id="hidden" class="box">
             <div >
-              <textarea id="comment" class="textarea is-primary is-focused is-small" placeholder="댓글을 입력해주세요."></textarea>
+              <textarea id="comment" class="textarea is-primary is-focused is-small" placeholder="댓글을 입력해주세요." style="width:100%; border: 0; resize: none;"></textarea>
               <br>
-              <button onclick="addComment()" class="button is-dark">댓글작성</button>
+              <button id="comment-add" onclick="addComment()" class="button is-dark">댓글작성</button>
             </div>
           </div>
 
