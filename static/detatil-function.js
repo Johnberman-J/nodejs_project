@@ -44,11 +44,13 @@ $(document).ready( async function () {
                     const selecteduserID = receivingData[i]["userID"];
                     // console.log(selecteduserID)
                     const comment = receivingData[i]["comment"];
+                    const date = receivingData[i]["date"];
                     // console.log(comment)
                     if(selecteduserID==localStorage.getItem("userID")){
                         let tableTemplate = `<tr>
-                                                <th>${selecteduserID}</th>
-                                                <td>${comment}</td>
+                                                <th width="239px">${date}</th>
+                                                <th width="217px">${selecteduserID}</th>
+                                                <th width="1215px">${comment}</th>                                                
                                                 <td id="login">
                                                 <button id="comment-modify" onclick="modifyComment()" class="button is-dark">댓글수정</button>
                                                 <button id="comment-delete" onclick="deleteComment()" class="button is-dark">댓글삭제</button>
@@ -57,8 +59,9 @@ $(document).ready( async function () {
                         $("#commentinfo").append(tableTemplate);
                     } else {
                         let tableTemplate = `<tr>
-                                                <th>${selecteduserID}</th>
-                                                <td>${comment}</td>
+                                                <th width="239px">${date}</th>
+                                                <th width="217px">${selecteduserID}</th>
+                                                <th width="1215px">${comment}</th>  
                                              </tr>`;
                         $("#commentinfo").append(tableTemplate);
 
@@ -119,6 +122,7 @@ async function addComment() {
         return;
     }
 
+    const date = String(new Date()).substring(4,25);
     const userID = localStorage.getItem("userID")
     $.ajax({
         type: "POST",
@@ -126,7 +130,8 @@ async function addComment() {
         data: {
             detailId: detailId,
             userID: userID,
-            comment, comment
+            comment: comment,
+            date: date
         },
         success: (res) => {
             
@@ -146,7 +151,13 @@ function deleteComment() {
 
 function modifyComment() {
     $.ajax({
-        type:""
+        type: "POST",
+        url: "/data/comment/modify",
+        data: "",
+        success: (res) => {
+            alert(res);
+        }
+
     })
 }
 

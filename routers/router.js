@@ -5,6 +5,7 @@ const validationSchema = require("../schemas/validation");
 const comments = require("../schemas/commentSchema");
 const jwt = require("jsonwebtoken");
 const authJWT = require("../schemas/auth-jwt");
+const commentSchema = require('../schemas/commentSchema');
 
 
 const router = express.Router();
@@ -162,7 +163,7 @@ router.post('/login', async (req, res) => {
             return;
         }
         const token = jwt.sign({ nickname }, "jason");
-        console.log(nickname);
+        // console.log(nickname);
         // res.send(token);
         res.send({token, nickname});
     }
@@ -176,9 +177,9 @@ router.get("/auth", authJWT, async (req, res) => {
 })
 
 router.post("/comment", async (req, res) => {
-    console.log(req.body);
-    const { detailId, userID, comment } = req.body;
-    const commentDB = new comments({ detailId, userID, comment });
+    const { detailId, userID, comment, date } = req.body;
+    
+    const commentDB = new comments({ detailId, userID, comment, date });
     await commentDB.save();
 
     res.send("댓글이 등록 되었습니다!");
@@ -186,8 +187,11 @@ router.post("/comment", async (req, res) => {
 
 router.get("/comment", async (req, res) => {
     const allComments = await comments.find({});
-    // console.log( allComments );
     res.send(allComments)
+})
+
+router.post("/comment/modify", async(req, res) => {
+    res.send("통신중입니다!");
 })
 
 
