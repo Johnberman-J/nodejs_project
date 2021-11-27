@@ -50,17 +50,17 @@ $(document).ready( async function () {
                     if(selecteduserID==localStorage.getItem("userID")){
                         let tableTemplate = `<tr>
                                                 <th width="239px">
-                                                    <input id="date-select" type="text" name="text" size="20" style="font-size: 17px; font-weight: bold; width:100%; border: 0;" value="${date}">
+                                                    <input id="date-${date}" type="text" name="text" size="20" style="font-size: 17px; font-weight: bold; width:100%; border: 0;" value="${date}">
                                                 </th>
                                                 <th width="217px">
                                                     <input id="user-select" type="text" name="text" size="20" style="font-size: 17px; font-weight: bold; width:100%; border: 0;" value="${selecteduserID}">
                                                 </th>
                                                 <th width="1215px">
-                                                    <input id="comment-select" onclick="inputModify()" type="text" name="text" size="20" style="font-size: 17px; font-weight: bold; width:100%; border: 0;" value="${comment}">
+                                                    <input id="comment-${date}" onclick="inputModify(this.id)" type="text" name="text" size="20" style="font-size: 17px; font-weight: bold; width:100%; border: 0;" value="${comment}">
                                                 </th>                                                
                                                 <td id="login">
-                                                <button id="comment-modify" onclick="modifyComment()" class="button is-dark">댓글수정</button>
-                                                <button id="comment-delete" onclick="deleteComment()" class="button is-dark">댓글삭제</button>
+                                                <button id="modifybutton-${date}" onclick="modifyComment(this.id)" class="button is-dark">댓글수정</button>
+                                                <button id="deletebutton-${date}" onclick="deleteComment(this.id)" class="button is-dark">댓글삭제</button>
                                                 </td>
                                             </tr>`
                         $("#commentinfo").append(tableTemplate);
@@ -154,9 +154,13 @@ async function addComment() {
     window.location.href=`/detail?id=${detailId}`;
 }
 
-function deleteComment() {
+async function deleteComment(uniqueDate) {
+    const dateId = uniqueDate.substring(13);
+    let uniqueID = document.getElementById(`date-${dateId}`);
+    const date = uniqueID.value;
+    
     if(confirm("정말로 삭제하시겠습니까?")) {
-        const date = $("#date-select").val();
+        
         $.ajax({
             type:"DELETE",
             url:"/data/comment/delete",
@@ -174,9 +178,10 @@ function deleteComment() {
     }
 }
 
-function modifyComment() {
-    const date = $("#date-select").val();
-    const comment = $("#comment-select").val();
+async function modifyComment(uniqueDate) {
+    const uniqueId = await uniqueDate.substring(13);
+    const date = await document.getElementById(`date-${uniqueId}`).value;
+    const comment = await document.getElementById(`comment-${uniqueId}`).value;
 
     if(!comment) {
         alert("수정 할 내용을 입력해주세요!");
@@ -200,7 +205,8 @@ function modifyComment() {
     window.location.href=`/detail?id=${detailId}`;
 }
 
-function inputModify() {
+async function inputModify(dateID) {
+    const date = await dateID.substring(8);
     const modifyTemplate =  `
                             <div id="hidden" style="display: none;" class="box">
                                 <div >
@@ -212,9 +218,8 @@ function inputModify() {
                             `;
     $("#hidden").replaceWith(modifyTemplate);
 
-    const modifyButton = `
-                            <button id="comment-modify" onclick="modifyComment()" class="button is-dark">저장</button>
-                         `;
-    $("#comment-modify").replaceWith(modifyButton);      
+    
+    let change = document.getElementById(`modifybutton-${date}`);
+    change.textContent = "저장";
 }
 
